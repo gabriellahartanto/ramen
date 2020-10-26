@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
 const CronJob = require('cron').CronJob;
+require('dotenv').config();
 
 const client = new Discord.Client();
 
@@ -23,11 +23,11 @@ client.on('message', (message) => {
     message.reply(`The sum of all the arguments you provided is ${sum}!`);
   } else if (command === 'reminder') {
     const job = new CronJob('0 0 19 * * 1', function() {
-      message.reply('@everyone Guys main yuk!');
+      message.channel.send('@everyone Guys main yuk!');
     }, null, true, 'Asia/Jakarta');
     job.start();
   }
 
 });
 
-client.login(config.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
